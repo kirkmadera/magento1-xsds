@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Add this to your config.xml files in the root <config> node
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../code/community/KMadera/Magento1Xsds/etc/schema/layout.xsd"
+    -->
+
+    <xs:element name="layout" type="layoutType"/>
+
+    <xs:complexType name="layoutUpdateType">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element type="actionType" name="action"/>
+            <xs:element type="referenceType" name="reference"/>
+            <xs:element type="removeType" name="remove"/>
+            <xs:element type="blockType" name="block"/>
+            <xs:element type="updateType" name="update"/>
+            <xs:element name="label" type="xs:string"/>
+        </xs:choice>
+        <xs:attribute type="xs:string" name="translate"/>
+        <xs:attribute type="xs:string" name="module"/>
+    </xs:complexType>
+
+    <xs:complexType name="blockType">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element type="actionType" name="action"/>
+            <xs:element type="blockType" name="block"/>
+            <xs:element type="xs:string" name="label"/>
+            <!-- A reference inside of a block is awkward since reference is evaluated globally, but core Magento does this -->
+            <xs:element type="referenceType" name="reference"/>
+        </xs:choice>
+        <xs:attribute type="xs:string" name="name" use="required"/>
+        <xs:attribute type="xs:string" name="type" use="required"/>
+        <xs:attribute type="xs:string" name="template"/>
+        <xs:attribute type="xs:string" name="before"/>
+        <xs:attribute type="xs:string" name="after"/>
+        <xs:attribute type="xs:string" name="as"/>
+        <xs:attribute type="xs:string" name="translate"/>
+        <xs:attribute type="xs:string" name="module"/>
+        <xs:attribute type="xs:string" name="output"/>
+        <xs:attribute type="xs:string" name="ifconfig"/>
+    </xs:complexType>
+
+    <xs:complexType name="referenceType">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element type="actionType" name="action"/>
+            <xs:element type="blockType" name="block"/>
+            <!-- A remove inside of a reference is awkward since remove is evaluated globally, but core Magento does this -->
+            <xs:element type="removeType" name="remove"/>
+            <!-- A reference inside of a reference is awkward since reference is evaluated globally, but core Magento does this -->
+            <xs:element type="referenceType" name="reference"/>
+        </xs:choice>
+        <xs:attribute type="xs:string" name="name" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="removeType">
+        <xs:attribute type="xs:string" name="name" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="updateType">
+        <xs:attribute type="xs:string" name="handle" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="actionType">
+        <xs:choice minOccurs="0">
+            <xs:any processContents="skip"/>
+        </xs:choice>
+        <xs:attribute type="xs:string" name="method" use="required"/>
+        <xs:attribute type="xs:string" name="translate"/>
+        <xs:attribute type="xs:string" name="module"/>
+        <xs:attribute type="xs:string" name="ifconfig"/>
+    </xs:complexType>
+
+    <xs:complexType name="layoutType">
+        <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <!-- Magento Core Base -->
+            <xs:element type="layoutUpdateType" name="default" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="catalog_category_default" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="catalog_category_layered" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="catalog_product_compare_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="customer_account_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="catalog_product_view" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="PRODUCT_TYPE_simple" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="PRODUCT_TYPE_configurable" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="PRODUCT_TYPE_grouped" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="PRODUCT_TYPE_virtual" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="catalog_product_send" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="catalog_product_gallery" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="catalog_seo_sitemap" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="catalog_seo_sitemap_category" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="catalog_seo_sitemap_category_tree" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="catalog_seo_sitemap_product" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_billing_agreement_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_billing_agreement_view" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="customer_account" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_recurring_profile_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_recurring_profile_view__tabs" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_recurring_profile_view" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_recurring_profile_orders" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_onepage_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_onepage_review" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="cms_index_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="cms_index_defaultindex" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_cart_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="catalog_category_view" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="catalogsearch_result_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="catalogsearch_advanced_result" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="tag_product_list" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="tag_customer_view" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_multishipping_addresses" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_multishipping_shipping" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_multishipping_overview" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="paypal_express_review" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="paypal_express_review_details" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="paypaluk_express_review" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="paypaluk_express_review_details" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="PRODUCT_TYPE_bundle" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_order_view" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_order_invoice" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_order_shipment" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_order_creditmemo" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_order_print" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_order_printinvoice" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_order_printshipment" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_order_printcreditmemo" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_guest_view" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_guest_invoice" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_guest_shipment" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_guest_creditmemo" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_guest_print" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_guest_printinvoice" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_guest_printshipment" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_guest_printcreditmemo" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_email_order_items" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_email_order_invoice_items" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_email_order_shipment_items" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_email_order_creditmemo_items" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="rss_catalog_category" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="rss_catalog_new" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="customer_account_login" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="customer_account_forgotpassword" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="rss_catalog_new" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="customer_account_create" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sendfriend_product_send" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="shipping_tracking_ajax" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="shipping_tracking_popup" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="tag_list_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="tag_customer_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="review_product_list" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_index_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_localization_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_homebanners_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_catalog_filters" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_catalog_category" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_catalog_categorydetails" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_catalog_product" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_catalog_productview" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_catalog_productoptions" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_catalog_productgallery" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_catalog_productreview" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_catalog_productreviews" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_catalog_search" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_catalog_searchdetails" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_catalog_searchsuggest" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_cart_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_cart_info" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_cart_shoppingcart" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_cart_configure" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_customer_form" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_customer_checkoutregistration" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_wishlist_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_wishlist_details" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_customer_address" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_customer_addressform" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_customer_orderlist" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_customer_orderdetails" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_customer_storecredit" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_customer_giftcardcheck" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_customer_downloads" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_configuration_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_checkout_addressmassaction" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_checkout_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_checkout_billingaddress" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_checkout_newbillingaddressform" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_checkout_shippingaddress" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_checkout_newshippingaddressform" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_checkout_shippingmethods" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_checkout_shippingmethodslist" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_checkout_paymentmethods" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_checkout_paymentmethodlist" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_checkout_orderreview" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_checkout_ordersummary" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_paypal_mep_shippingmethods" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_paypal_mep_carttotals" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_paypal_mecl_review" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_paypal_mecl_orderreview" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_paypal_mecl_shippingmethods" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_cms_page" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_pbridge_result" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="xmlconnect_review_form" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="wishlist_index_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="wishlist_index_share" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="wishlist_index_configure" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="wishlist_shared_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_multishipping" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="customer_logged_in" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_cart_configure" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_onepage_reorder" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_order_history" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_order_reorder" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_guest_form" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sales_guest_reorder" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="rss_index_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="rss_index_nofeed" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="rss_index_wishlist" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="rss_catalog_special" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="rss_catalog_salesrule" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="rss_catalog_tag" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="rss_catalog_notifystock" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="rss_catalog_review" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="rss_order_new" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="rss_order_status" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="rss_catalog_review" minOccurs="0" maxOccurs="1"/>
+
+            <!-- Magento Core Enterprise -->
+            <xs:element type="layoutUpdateType" name="review_product_view" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="CATALOGPERMISSIONS_DISABLED_CATALOG_SEARCH" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="catalogsearch_advanced_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="catalogsearch_term_popular" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_multishipping_login" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_multishipping_register" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_multishipping_address_select" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_multishipping_address_selectbilling" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_multishipping_address_newshipping" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_multishipping_address_newbilling" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_multishipping_address_editshipping" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_multishipping_address_editaddress" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_multishipping_address_editbilling" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_multishipping_customer_address" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_multishipping_billing" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_multishipping_success" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_onepage_progress" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_onepage_progress_billing" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_onepage_progress_shipping" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_onepage_progress_shipping_method" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_onepage_progress_payment" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_onepage_paymentmethod" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_onepage_shippingmethod" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_onepage_additional" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_onepage_success" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_onepage_failure" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="sku_failed_products_handle" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="checkout_cart_configurefailed" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_checkout_sku_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="cms_page" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="cms_index_noroute" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="cms_index_defaultnoroute" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_cms_hierarchy_menu_content" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_cms_hierarchy_menu_left_column" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_cms_hierarchy_menu_right_column" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="contacts_index_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="customer_logged_out" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="customer_account_logoutsuccess" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="customer_account_changeforgotten" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="customer_account_confirmation" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="customer_account_edit" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="customer_address_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="customer_address_form" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="customer_form_template_handle" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_customerbalance_info_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="wishlist_search_view" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="wishlist_search_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="wishlist_search_results" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="PRODUCT_TYPE_giftcard" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_giftcardaccount_cart_check" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_giftcardaccount_cart_quickcheck" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_giftcardaccount_customer_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_giftregistry_index_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_giftregistry_index_view" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_giftregistry_index_share" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_giftregistry_index_items" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_giftregistry_search_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_giftregistry_search_results" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_giftregistry_search_advanced" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_giftregistry_view_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="calendar" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_giftregistry_index_addselect" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_giftregistry_index_edit" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_giftregistry_email_entity_items" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_invitation_index_send" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_invitation_index_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_invitation_customer_account_create" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="newsletter_manage_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="oauth_root_handle" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="oauth_root_handle_simple" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="oauth_authorize_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="oauth_authorize_simple" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="oauth_authorize_confirm" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="oauth_authorize_confirmsimple" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="oauth_authorize_reject" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="oauth_authorize_rejectsimple" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="oauth_customer_token_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="print" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="page_empty" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="page_one_column" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="page_two_columns_left" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="page_two_columns_right" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="page_three_columns" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_pbridge_pbridge_result" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_pbridge_payment_profile_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_pbridge_pbridge_success" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_pbridge_pbridge_error" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_pbridge_pbridge_onepagesuccess" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_pbridge_pbridge_cancel" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="catalog_category_layered_nochildren" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="reviews" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="review_customer_index" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="review_customer_view" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_reward_customer_info" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_return_history" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_return_create" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_return_create_handle" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_return_view" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_return_view_handle" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_return_returns" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_guest_returns" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_guest_view" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_guest_create" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_email_rma_items" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_return_addlabel" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_return_dellabel" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_guest_addlabel" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_guest_dellabel" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_tracking_popup" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_tracking_package" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_tracking_packageprint" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="enterprise_rma_tracking_printlabel" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="restriction_index_stub" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="restriction_privatesales_mode" minOccurs="0" maxOccurs="1"/>
+
+            <!-- Robofirm_AjaxCart -->
+            <xs:element type="layoutUpdateType" name="ajaxcart" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="removeajaxcart" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="ajaxcart_cart_minicart" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="ajaxcart_cart_afteraddmodal" minOccurs="0" maxOccurs="1"/>
+
+            <!-- Robofirm_Common -->
+            <xs:element type="layoutUpdateType" name="remove_jquery_1.3.1" minOccurs="0" maxOccurs="1"/>
+
+            <!-- Robofirm_QuickView -->
+            <xs:element type="layoutUpdateType" name="quickview_category_and_search" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="quickview_product_view" minOccurs="0" maxOccurs="1"/>
+
+            <!-- Robofirm_Swatch -->
+            <xs:element type="layoutUpdateType" name="swatch_index_images" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="swatch_head_updates" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="swatch_index_images" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="swatch_index_images" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="swatch_index_images" minOccurs="0" maxOccurs="1"/>
+            <xs:element type="layoutUpdateType" name="swatch_index_images" minOccurs="0" maxOccurs="1"/>
+
+            <!-- Do not show items outside of this as an error -->
+            <xs:any processContents="skip"/>
+        </xs:choice>
+        <xs:attribute type="xs:string" name="version"/>
+    </xs:complexType>
+
+</xs:schema>

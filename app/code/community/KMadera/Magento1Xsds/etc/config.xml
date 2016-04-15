@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema/config.xsd">
+    <modules>
+        <KMadera_Magento1_Xsds>
+            <version>0.1.0</version>
+        </KMadera_Magento1_Xsds>
+    </modules>
+    <global>
+        <helpers>
+            <magento1xsds>
+                <class>KMadera_Magento1Xsds</class>
+            </magento1xsds>
+        </helpers>
+    </global>
+</config>

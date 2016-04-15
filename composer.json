@@ -1,0 +1,13 @@
+{
+    "name": "kirkmadera/magento1-xsds",
+    "description": "XSDs for Magento 1 to enable IDE auto-completion and structure validation.",
+    "type": "magento-module",
+    "authors": [
+        {
+            "name": "Kirk Madera",
+            "email": "kmadera@robofirm.com",
+            "homepage": "http://www.kirkmadera.com",
+            "role": "Director of Technology"
+        }
+    ]
+}

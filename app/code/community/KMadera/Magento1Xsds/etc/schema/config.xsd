@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Add this to your config.xml files in the root <config> node
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../code/community/KMadera/Magento1Xsds/etc/schema/config.xsd"
+    -->
+    <xs:element name="config" type="configType"/>
+
+    <xs:complexType name="configType">
+        <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <xs:element type="openType" name="modules"/>
+            <xs:element type="areaType" name="global"/>
+            <xs:element type="areaType" name="frontend"/>
+            <xs:element type="areaType" name="adminhtml"/>
+            <xs:element type="areaType" name="admin"/>
+            <xs:element type="openType" name="stores"/>
+            <xs:element type="openType" name="websites"/>
+            <xs:element type="openType" name="default"/>
+            <xs:element type="crontabType" name="crontab"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="openType">
+        <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <xs:any processContents="skip"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="areaType">
+        <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <xs:element type="openType" name="blocks"/>
+            <xs:element type="openType" name="helpers"/>
+            <xs:element type="openType" name="models"/>
+            <xs:element type="openType" name="resources"/>
+            <xs:element type="indexType" name="index"/>
+            <xs:element type="openType" name="events"/>
+            <xs:element type="layoutType" name="layout"/>
+            <xs:element type="translateType" name="translate"/>
+            <xs:element type="templateType" name="template"/>
+            <xs:element type="openType" name="routers"/>
+            <xs:element type="openType" name="fieldsets"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="layoutType">
+        <xs:all minOccurs="1">
+            <xs:element type="openType" name="updates"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="translateType">
+        <xs:all minOccurs="1">
+            <xs:element type="openType" name="modules"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="templateType">
+        <xs:all minOccurs="1">
+            <xs:element type="openType" name="email"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="adminType">
+        <xs:all minOccurs="1">
+            <xs:element type="openType" name="fieldsets"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="crontabType">
+        <xs:all minOccurs="1">
+            <xs:element type="openType" name="jobs"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="indexType">
+        <xs:all minOccurs="1">
+            <xs:element type="openType" name="indexer"/>
+        </xs:all>
+    </xs:complexType>
+
+</xs:schema>
