@@ -9,11 +9,15 @@ Install this module into your Magento project via composer, then enable it in ea
 
 ### Module Config XML
 Add this to your config.xml files in the root `<config>` node
-`xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../code/community/KMadera/Magento1Xsds/etc/schema/config.xsd"`
+```
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../code/community/KMadera/Magento1Xsds/etc/schema/config.xsd"
+```
 
 ### Layout XML
 Add this to your config.xml files in the root `<config>` node
-`xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../code/community/KMadera/Magento1Xsds/etc/schema/layout.xsd"`
+```
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../code/community/KMadera/Magento1Xsds/etc/schema/layout.xsd"`\
+```
 
 ## Known Issues
 Magento 1 uses custom node names which makes it difficult to write XSDs for. I have not yet found a way
