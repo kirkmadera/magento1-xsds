@@ -21,7 +21,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocat
 ### Layout XML
 Add this to your config.xml files in the root `<config>` node
 ```
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../code/community/KMadera/Magento1Xsds/etc/schema/layout.xsd"`\
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../code/community/KMadera/Magento1Xsds/etc/schema/layout.xsd"
 ```
 
 ## Known Issues
