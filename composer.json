@@ -9,5 +9,8 @@
             "homepage": "http://www.kirkmadera.com",
             "role": "Director of Technology"
         }
-    ]
+    ],
+    "keywords": ["magento"],
+    "homepage": "https://github.com/kirkmadera/magento1-xsds",
+    "license": "MIT"
 }
