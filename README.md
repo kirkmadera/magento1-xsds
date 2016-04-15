@@ -3,7 +3,12 @@ KMadera_Magento1Xsds
 
 This module provides XSDs for Magento 1 to enable IDE auto-completion and structure validation.
 
+## Installation
 Install this module into your Magento project via composer, then enable it in each of your config xml files.
+
+```
+composer install kirkmadera/magento1-xsds
+```
 
 ## Supported configuration files
 
